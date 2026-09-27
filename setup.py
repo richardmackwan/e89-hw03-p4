@@ -1,4 +1,4 @@
-﻿"""Step 1: Import the libraries and select the compute device."""
+"""Step 1: Import the libraries and select the compute device."""
 
 import torch
 from torch import nn

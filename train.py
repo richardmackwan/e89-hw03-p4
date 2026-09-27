@@ -11,6 +11,9 @@ from model import ImageClassifier, loss_fn
 from setup import device
 from train_utils import train2
 
+# __file__ is undefined when this code runs as a notebook cell.
+PROJECT_DIR = Path(__file__).resolve().parent if "__file__" in globals() else Path.cwd()
+
 
 def main():
     torch.manual_seed(42)
@@ -25,7 +28,7 @@ def main():
         n_epochs=20,
     )
 
-    output_dir = Path(__file__).resolve().parent / "artifacts"
+    output_dir = PROJECT_DIR / "artifacts"
     output_dir.mkdir(parents=True, exist_ok=True)
     history_path = output_dir / "history.json"
     history_path.write_text(json.dumps(history, indent=2) + "\n", encoding="utf-8")

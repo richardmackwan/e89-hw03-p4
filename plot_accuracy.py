@@ -3,16 +3,15 @@
 import json
 from pathlib import Path
 
-import matplotlib
-
-matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 
+# __file__ is undefined when this code runs as a notebook cell.
+PROJECT_DIR = Path(__file__).resolve().parent if "__file__" in globals() else Path.cwd()
+
 
 def main():
-    project_dir = Path(__file__).resolve().parent
-    history_path = project_dir / "artifacts" / "history.json"
+    history_path = PROJECT_DIR / "artifacts" / "history.json"
     if not history_path.is_file():
         raise SystemExit("Training history is missing. Run python train.py first.")
 
@@ -35,10 +34,10 @@ def main():
     ax.legend()
     fig.tight_layout()
 
-    output_path = project_dir / "training_accuracy.png"
+    output_path = PROJECT_DIR / "training_accuracy.png"
     fig.savefig(output_path, dpi=150)
-    plt.close(fig)
     print(f"Saved accuracy plot to {output_path}")
+    plt.show()
 
 
 if __name__ == "__main__":
