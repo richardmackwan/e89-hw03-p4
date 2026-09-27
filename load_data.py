@@ -7,8 +7,11 @@ from torch.utils.data import DataLoader, random_split
 from torchvision.datasets import FashionMNIST
 from torchvision.transforms import v2
 
+# __file__ is undefined when this code runs as a notebook cell.
+PROJECT_DIR = Path(__file__).resolve().parent if "__file__" in globals() else Path.cwd()
 
-def load_data(root=Path(__file__).resolve().parent / "data"):
+
+def load_data(root=PROJECT_DIR / "data"):
     """Return batch-size-32 loaders with a reproducible 55,000/5,000 split."""
     transform = v2.Compose([
         v2.ToImage(),

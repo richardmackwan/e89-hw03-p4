@@ -8,9 +8,12 @@ import torch
 from load_data import load_data
 from model import ImageClassifier
 
+# __file__ is undefined when this code runs as a notebook cell.
+PROJECT_DIR = Path(__file__).resolve().parent if "__file__" in globals() else Path.cwd()
+
 
 def main():
-    model_path = Path(__file__).resolve().parent / "artifacts" / "model.pt"
+    model_path = PROJECT_DIR / "artifacts" / "model.pt"
     if not model_path.is_file():
         raise SystemExit("Trained weights are missing. Run python train.py first.")
 
